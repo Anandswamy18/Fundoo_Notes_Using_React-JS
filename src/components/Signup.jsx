@@ -159,7 +159,7 @@ const Signup = () => {
               </Button>
             </div>
           </form>
-          <img src={signpng} alt="signupimg" width={216} height={292} className="w-[256px] h-[350px] ml-[60px] mt-[50px] hidden xl:block" />
+          <img src={signpng} alt="signupimg" width={216} height={292} className="w-[256px] h-[350px] mr-[15px] ml-[60px] mt-[50px] hidden xl:block" />
           <div className="mt-[400px] ml-[-240px] hidden xl:block">
             <p className="text-slate-500">One account. All of Google</p>
             <p className="ml-[50px] text-slate-500">Working for you</p>
