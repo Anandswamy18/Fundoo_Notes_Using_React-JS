@@ -3,8 +3,7 @@ import React from 'react';
 import Signup from "./components/Signup"; // Ensure the case matches the actual file name
 import Signin from "./components/Signin"; // Ensure the case matches the actual file name
 import Dashboard from "./components/Dashboard";
-import Sidebar from "./components/Sidebar";
-
+import NoteContainer from "./components/NoteContainer";
 const RoutingModule = () => {
     const routes = createBrowserRouter([
         {
@@ -17,12 +16,13 @@ const RoutingModule = () => {
         },
 
         {
-            path:"/dashboard",
+            path:"/",
             element:<Dashboard/>,
             children:[
+                
                 {
                     path:"",
-                    element:<Sidebar/>
+                    element:<NoteContainer/>
                 }
             ]
         }

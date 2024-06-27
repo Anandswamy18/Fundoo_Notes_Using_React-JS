@@ -17,6 +17,7 @@ const Navlist = ({ open, setOpen, changeNavTitle }) => {
         const titles = ['Notes', 'Reminders', 'Edit Labels', 'Archive', 'Trash'];
         const selectedTitle = titles[index];
         changeNavTitle(selectedTitle);
+        setOpen(false);
     };
 
     const handleMouseEnter = () => {
