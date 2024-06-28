@@ -43,3 +43,19 @@ export const getArchive = async () => {
     const response =  await axios.get("https://fundoonotes.incubation.bridgelabz.com/api/notes/getArchiveNotesList",headerConfig);
     return response;
 }
+
+
+export const getTrash = async () => {
+    const response =  await axios.get("https://fundoonotes.incubation.bridgelabz.com/api/notes/getTrashNotesList",headerConfig);
+    return response;
+}
+
+
+export const removeNotes = async (obj) => {
+    const response =  await axios.post("https://fundoonotes.incubation.bridgelabz.com/api/notes/deleteForeverNotes",obj,headerConfig);
+    return response;
+}
+
+
+
+

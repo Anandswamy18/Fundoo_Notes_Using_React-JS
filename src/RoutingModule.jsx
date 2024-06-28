@@ -4,6 +4,8 @@ import Signup from "./components/Signup"; // Ensure the case matches the actual 
 import Signin from "./components/Signin"; // Ensure the case matches the actual file name
 import Dashboard from "./components/Dashboard";
 import NoteContainer from "./components/NoteContainer";
+import ArchiveContainer from "./components/ArchiveContainer";
+import TrashContainer from "./components/TrashContainer";
 const RoutingModule = () => {
     const routes = createBrowserRouter([
         {
@@ -23,6 +25,14 @@ const RoutingModule = () => {
                 {
                     path:"",
                     element:<NoteContainer/>
+                },
+                {
+                    path:"/archivenotes",
+                    element:<ArchiveContainer/>
+                },
+                {
+                    path:"/trashnotes",
+                    element:<TrashContainer/>
                 }
             ]
         }

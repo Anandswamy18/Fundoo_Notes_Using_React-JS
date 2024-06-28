@@ -3,6 +3,7 @@ import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, Box } from 
 import { LightbulbOutlined, ArchiveOutlined, DeleteOutlineOutlined } from '@mui/icons-material';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import { Link } from 'react-router-dom';
 
 const Navlist = ({ open, setOpen, changeNavTitle }) => {
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -50,11 +51,13 @@ const Navlist = ({ open, setOpen, changeNavTitle }) => {
             id: 3,
             label: 'Archive',
             icon: <ArchiveOutlined />,
+            path: '/archivenotes',
         },
         {
             id: 4,
             label: 'Trash',
             icon: <DeleteOutlineOutlined />,
+            path: '/trashnotes',
         },
     ];
 
@@ -69,6 +72,8 @@ const Navlist = ({ open, setOpen, changeNavTitle }) => {
                     onMouseLeave={handleMouseLeave}
                 >
                     <ListItemButton
+                    component={Link}
+                    to={list.path}
                         sx={{
                             minHeight: 48,
                             backgroundColor: selectedIndex === index && open ? '#feefc3' : 'transparent',
