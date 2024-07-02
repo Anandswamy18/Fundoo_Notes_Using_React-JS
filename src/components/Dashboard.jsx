@@ -56,6 +56,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const Sidebar = () => {
     const [open, setOpen] = React.useState(false);
     const [title, setTitle] = React.useState('Keep');
+    
 
     const handleDrawer = () => {
         setOpen(prevState => !prevState);
@@ -64,7 +65,9 @@ const Sidebar = () => {
     const changeNavTitle = (title) => {
         setTitle(title);
     };
+    
 
+   
     return (
         <>
             <Box sx={{ display: 'flex' }}>

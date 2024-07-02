@@ -22,7 +22,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Logo from '../assets/google.webp';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',   
@@ -84,6 +84,7 @@ const Heading = styled(Typography)`
 const Header = ({ initialTitle, open, title, handleDrawer }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [accountMenuAnchorEl, setAccountMenuAnchorEl] = useState(null);
+    const navigate=useNavigate()
 
     const handleClick = (e) => {
         setAnchorEl(e.currentTarget);
@@ -99,6 +100,15 @@ const Header = ({ initialTitle, open, title, handleDrawer }) => {
 
     const handleAccountMenuClose = () => {
         setAccountMenuAnchorEl(null);
+    };
+
+    const token=localStorage.getItem('token')
+
+    const handleLogout = () => {
+        
+        localStorage.removeItem('token');
+ 
+         navigate('/signin');
     };
 
     return (
@@ -181,14 +191,25 @@ const Header = ({ initialTitle, open, title, handleDrawer }) => {
                                     horizontal: 'right',
                                 }}
                             >   
-                             
+                                {token ? (<>
+                                <MenuItem onClick={handleAccountMenuClose}>
+                                 email: {localStorage.getItem('email')}
+                                </MenuItem>
+                                <MenuItem onClick={handleAccountMenuClose}>
+                                 name: {localStorage.getItem('name')}
+                                </MenuItem>
+                                <MenuItem onClick={handleAccountMenuClose}>
+                                 <span onClick={handleLogout}>Logout</span> 
+                                </MenuItem>
+                                </>):( <>
+                                    <MenuItem>Welcome</MenuItem>
                                 <MenuItem onClick={handleAccountMenuClose}>
                                   <Link to="/signup">Sign Up</Link>  
                                 </MenuItem>
-                                <MenuItem onClick={handleAccountMenuClose}>
+                                    <MenuItem onClick={handleAccountMenuClose}>
                                 <Link to="/signin">Sign In</Link>
-                                    
                                 </MenuItem>
+                                </>)}
                             </Menu>
                         </Hidden>
                         <Hidden smDown>
@@ -225,13 +246,26 @@ const Header = ({ initialTitle, open, title, handleDrawer }) => {
                                     horizontal: 'right',
                                 }}
                             >
+                              {token ? (<>
+                                <MenuItem onClick={handleAccountMenuClose}>
+                                  email: {localStorage.getItem('email')}
+                                </MenuItem>
+                                <MenuItem onClick={handleAccountMenuClose}>
+                                  name: {localStorage.getItem('name')}
+                                </MenuItem>
+                                <MenuItem onClick={handleAccountMenuClose}>
+                                 <span onClick={handleLogout}>Logout</span> 
+                                </MenuItem>
+                                </>):( <>
+                                    
+                                    <MenuItem>Welcome</MenuItem>
                                 <MenuItem onClick={handleAccountMenuClose}>
                                   <Link to="/signup">Sign Up</Link>  
                                 </MenuItem>
-                                <MenuItem onClick={handleAccountMenuClose}>
+                                    <MenuItem onClick={handleAccountMenuClose}>
                                 <Link to="/signin">Sign In</Link>
-                                    
                                 </MenuItem>
+                                </>)}
                             </Menu>
                         </Hidden>
 

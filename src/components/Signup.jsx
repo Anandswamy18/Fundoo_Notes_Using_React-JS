@@ -70,6 +70,7 @@ const Signup = () => {
       try {
         const response = await signup(obj);
         console.log(response);
+        localStorage.setItem('name', formData.firstName);
         localStorage.setItem('email', formData.email);
         localStorage.setItem('password', formData.password);
         navigate('/signin')

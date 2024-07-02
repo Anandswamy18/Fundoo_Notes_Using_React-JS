@@ -53,6 +53,8 @@ const Signin = () => {
     try {
       const response = await signin(obj);
       console.log(response);
+      localStorage.setItem('name', response.data.firstName);
+      localStorage.setItem('email', response.data.email);
       localStorage.setItem('token', response.data.id);
       navigate('/')
     } catch (error) {

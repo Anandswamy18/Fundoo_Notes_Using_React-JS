@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { IconButton, Menu, MenuItem } from '@mui/material/';
+import { IconButton, Menu, MenuItem, Modal } from '@mui/material/';
 import { AddAlertOutlined, PaletteOutlined, PersonAddAltOutlined, MoreVertOutlined, ArchiveOutlined, ImageOutlined, UnarchiveOutlined, Block, Circle, DeleteOutline, RestoreFromTrash } from '@mui/icons-material';
-import { Deleting, updateArchive, updateColor, removeNotes } from '../services/Noteservices';
+import { Deleting, updateArchive, updateColor, removeNotes,updateNote } from '../services/Noteservices';
 
 function NoteCard({ note, action, isTrashNote, getData }) {
     const [menuAnchorEl, setMenuAnchorEl] = useState(null);
     const [colorMenuAnchorEl, setColorMenuAnchorEl] = useState(null);
+    const [editNote, setEditNote] = useState(false);
+    const [editTitle, setEditTitle] = useState(note.title || "");
+    const [editDescription, setEditDescription] = useState(note.description || "");
 
     const handleMenuClick = (event) => {
         setMenuAnchorEl(event.currentTarget);
@@ -81,9 +84,34 @@ function NoteCard({ note, action, isTrashNote, getData }) {
         }
     };
 
+    const handleEditNote = (action) => {
+        if (action === "open") {
+            setEditNote(true);
+        } else {
+            setEditNote(false);
+        }
+    };
+
+    const handleEditSave = async () => {
+        setEditNote(false);
+        note.title = editTitle;
+        note.description = editDescription;
+        try {
+            await updateNote({
+                noteIdList: [note.id],
+                title: editTitle,
+                description: editDescription
+            });
+            console.log(note.id,editTitle,editDescription)
+            getData();
+        } catch (error) {
+            console.error('Error updating note:', error);
+        }
+    };
+
     return (
         <div className="flex flex-col justify-between mt-[-40px] h-[110px] min-h[103px] max-h-[385.2px] w-[250px] border-gray-200 rounded-lg border-2 relative m-[10px] group" style={{ backgroundColor: note.color }}>
-            <div className='p-[8px]'>
+            <div className='p-[8px]' onClick={() => handleEditNote('open')}>
                 <input value={note.title} type='text' className="text-base font-medium leading-6 pt-2 mb-[4px] outline-none bg-transparent" placeholder='Title' readOnly />
                 <textarea value={note.description} className="h-full w-full font-normal leading-5 resize-none outline-none bg-transparent overflow-hidden" readOnly />
             </div>
@@ -124,6 +152,38 @@ function NoteCard({ note, action, isTrashNote, getData }) {
                     <IconButton onClick={() => noteColor('#33FFBD')}><Circle sx={{ color: '#33FFBD' }} /></IconButton>
                 </div>
             </Menu>
+
+            <Modal open={editNote} onClose={() => setEditNote(false)}>
+                <div className="h-[136px] w-[600px] border border-solid border-gray-400 m-auto shadow-md rounded-lg flex flex-col bg-white mt-[190px] ">
+                    <div className="h-16 w-full flex items-center">
+                        <input type="text" id="title" onChange={(e) => setEditTitle(e.target.value)} value={editTitle} className="h-full w-[400px] ml-[20px] border-none outline-none text-lg" />
+            
+                    </div>
+                    <span className="h-16 w-full">
+                        <input type="text" id="desc" value={editDescription} onChange={(e) => setEditDescription(e.target.value)} className="h-full w-[560px] ml-[20px] border-none outline-none text-lg" />
+                    </span>
+                    <div className="ml-[8px] mt-3 h-8 flex items-center justify-between">
+                        <div className="icon-container ml-4">
+                            <IconButton title='Remind me' className='!w-[35px] !min-w-0' color="inherit"><AddAlertOutlined style={{ fontSize: 18 }} /></IconButton>
+                            <IconButton title='Collaborator' className='!w-[35px] !min-w-0' color="inherit"><PersonAddAltOutlined style={{ fontSize: 18 }} /></IconButton>
+                            <IconButton title='Background options' className='!w-[35px] !min-w-0' color="inherit"><PaletteOutlined style={{ fontSize: 18 }} /></IconButton>
+                            <IconButton title='Add image' className='!w-[35px] !min-w-0' color="inherit"><ImageOutlined style={{ fontSize: 16 }} /></IconButton>
+                            {note.isArchived ? (
+                                <IconButton onClick={toggleArchive} title='Unarchive' className='!w-[35px] !min-w-0' color="inherit"><UnarchiveOutlined style={{ fontSize: 18 }} /></IconButton>
+                            ) : (
+                                <IconButton onClick={toggleArchive} title='Archive' className='!w-[35px] !min-w-0' color="inherit"><ArchiveOutlined style={{ fontSize: 18 }} /></IconButton>
+                            )}
+                            <IconButton onClick={handleMenuClick} title='More' className='!w-[35px] !min-w-0' aria-controls="simple-menu" aria-haspopup="true" color="inherit"><MoreVertOutlined /></IconButton>
+                            <Menu id="simple-menu" open={Boolean(menuAnchorEl)} onClose={handleMenuClose} anchorEl={menuAnchorEl}>
+                                <MenuItem onClick={deleteNote}>Delete</MenuItem>
+                                <MenuItem>Share</MenuItem>
+                                <MenuItem>Add Label</MenuItem>
+                            </Menu>
+                        </div>
+                        <button onClick={handleEditSave} className="h-7 w-20 bg-gray-200 mr-3 rounded">Save</button>
+                    </div>
+                </div>
+            </Modal>
         </div>
     );
 }

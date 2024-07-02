@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CircularProgress } from '@mui/material';
 import NoteCard from './NoteCard';
 import TakeNote from './TakeNote';
-import { getNotes, Deleting } from '../services/Noteservices';
+import { getNotes } from '../services/Noteservices';
 
 const NotesContainer = () => {
     const [info, setInfo] = useState([]);
