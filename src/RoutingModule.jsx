@@ -1,8 +1,9 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import React from 'react';
-import Signup from "./components/Signup"; // Ensure the case matches the actual file name
-import Signin from "./components/Signin"; // Ensure the case matches the actual file name
+import Signup from "./components/Signup"; 
+import Signin from "./components/Signin"; 
 import Dashboard from "./components/Dashboard";
+import Notefound from "./components/Notefound";
 import NoteContainer from "./components/NoteContainer";
 import ArchiveContainer from "./components/ArchiveContainer";
 import TrashContainer from "./components/TrashContainer";
@@ -15,6 +16,10 @@ const RoutingModule = () => {
         {
             path: "/signin",
             element: <Signin />,
+        },
+        {
+            path:"*",
+            element:<Notefound/>
         },
 
         {

@@ -17,6 +17,7 @@ const ArchiveContainer = () => {
                 const notes = response.data.data.data;
                 const filteredNotes = notes.filter(note => note.isArchived && !note.isDeleted);
                 setInfo(filteredNotes);
+                console.log(filteredNotes)
             } else {
                 setError('Data is not in the expected format');
             }

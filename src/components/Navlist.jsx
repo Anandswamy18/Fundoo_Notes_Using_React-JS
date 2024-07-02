@@ -41,11 +41,13 @@ const Navlist = ({ open, setOpen, changeNavTitle }) => {
             id: 1,
             label: 'Reminders',
             icon: <NotificationsOutlinedIcon />,
+            path: '/remind',
         },
         {
             id: 2,
             label: 'Edit Labels',
             icon: <EditOutlinedIcon />,
+            path: '/edit',
         },
         {
             id: 3,

@@ -96,13 +96,13 @@ function NoteCard({ note, action, isTrashNote, getData }) {
         setEditNote(false);
         note.title = editTitle;
         note.description = editDescription;
+        
         try {
             await updateNote({
                 noteIdList: [note.id],
                 title: editTitle,
                 description: editDescription
             });
-            console.log(note.id,editTitle,editDescription)
             getData();
         } catch (error) {
             console.error('Error updating note:', error);

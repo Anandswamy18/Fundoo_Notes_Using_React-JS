@@ -17,6 +17,7 @@ const NotesContainer = () => {
             if (response && response.data && response.data.data && Array.isArray(response.data.data.data)) {
                 const notes = response.data.data.data;
                 const filteredNotes = notes.filter(note => !note.isArchived && !note.isDeleted);
+                console.log(filteredNotes)
                 setInfo(filteredNotes);
             } else {
                 setError('Data is not in the expected format');
