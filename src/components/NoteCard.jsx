@@ -153,20 +153,20 @@ function NoteCard({ note, action, isTrashNote, getData }) {
                 </div>
             </Menu>
 
-            <Modal open={editNote} onClose={() => setEditNote(false)}>
-                <div className="h-[136px] w-[600px] border border-solid border-gray-400 m-auto shadow-md rounded-lg flex flex-col bg-white mt-[190px] ">
+            <Modal open={editNote} onClose={() => setEditNote(false)}  >
+                <div className="h-[136px] w-[600px] border border-solid border-gray-400 m-auto shadow-md rounded-lg flex flex-col bg-white mt-[190px] " style={{ backgroundColor: note.color }}>
                     <div className="h-16 w-full flex items-center">
-                        <input type="text" id="title" onChange={(e) => setEditTitle(e.target.value)} value={editTitle} className="h-full w-[400px] ml-[20px] border-none outline-none text-lg" />
+                        <input type="text" id="title" style={{ backgroundColor: note.color }} onChange={(e) => setEditTitle(e.target.value)} value={editTitle} className="h-full w-[400px] ml-[20px] border-none outline-none text-lg" />
             
                     </div>
-                    <span className="h-16 w-full">
-                        <input type="text" id="desc" value={editDescription} onChange={(e) => setEditDescription(e.target.value)} className="h-full w-[560px] ml-[20px] border-none outline-none text-lg" />
+                    <span className="h-16 w-full" >
+                        <input type="text" id="desc" style={{ backgroundColor: note.color }} value={editDescription} onChange={(e) => setEditDescription(e.target.value)} className="h-full w-[560px] ml-[20px] border-none outline-none text-lg" />
                     </span>
                     <div className="ml-[8px] mt-3 h-8 flex items-center justify-between">
                         <div className="icon-container ml-4">
                             <IconButton title='Remind me' className='!w-[35px] !min-w-0' color="inherit"><AddAlertOutlined style={{ fontSize: 18 }} /></IconButton>
                             <IconButton title='Collaborator' className='!w-[35px] !min-w-0' color="inherit"><PersonAddAltOutlined style={{ fontSize: 18 }} /></IconButton>
-                            <IconButton title='Background options' className='!w-[35px] !min-w-0' color="inherit"><PaletteOutlined style={{ fontSize: 18 }} /></IconButton>
+                            <IconButton onClick={handleColorMenuClick}  title='Background options' className='!w-[35px] !min-w-0' color="inherit"><PaletteOutlined style={{ fontSize: 18 }} /></IconButton>
                             <IconButton title='Add image' className='!w-[35px] !min-w-0' color="inherit"><ImageOutlined style={{ fontSize: 16 }} /></IconButton>
                             {note.isArchived ? (
                                 <IconButton onClick={toggleArchive} title='Unarchive' className='!w-[35px] !min-w-0' color="inherit"><UnarchiveOutlined style={{ fontSize: 18 }} /></IconButton>
@@ -179,6 +179,17 @@ function NoteCard({ note, action, isTrashNote, getData }) {
                                 <MenuItem>Share</MenuItem>
                                 <MenuItem>Add Label</MenuItem>
                             </Menu>
+                            <Menu open={Boolean(colorMenuAnchorEl)} onClose={handleColorMenuClose} anchorEl={colorMenuAnchorEl}>
+                <div className='flex'>
+                    <IconButton onClick={() => noteColor('#FFFFFF')}><Block /></IconButton>
+                    <IconButton onClick={() => noteColor('#94bbe9')}><Circle sx={{ color: '#94bbe9' }} /></IconButton>
+                    <IconButton onClick={() => noteColor('#32a852')}><Circle sx={{ color: '#32a852' }} /></IconButton>
+                    <IconButton onClick={() => noteColor('#4287f5')}><Circle sx={{ color: '#4287f5' }} /></IconButton>
+                    <IconButton onClick={() => noteColor('#FF5733')}><Circle sx={{ color: '#FF5733' }} /></IconButton>
+                    <IconButton onClick={() => noteColor('#FFBD33')}><Circle sx={{ color: '#FFBD33' }} /></IconButton>
+                    <IconButton onClick={() => noteColor('#33FFBD')}><Circle sx={{ color: '#33FFBD' }} /></IconButton>
+                </div>
+            </Menu>
                         </div>
                         <button onClick={handleEditSave} className="h-7 w-20 bg-gray-200 mr-3 rounded">Save</button>
                     </div>

@@ -66,7 +66,7 @@ const Sidebar = () => {
         setTitle(title);
     };
     
-
+  
    
     return (
         <>
@@ -78,7 +78,8 @@ const Sidebar = () => {
                     {open && (
                         <Box sx={{ position: 'absolute', bottom: 0, left: 0, right: 0, p: 2 }}>
                            
-                        </Box>  
+                        </Box> 
+                         
                     )}
                 </Drawer>
             </Box>

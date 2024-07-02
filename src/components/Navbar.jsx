@@ -191,7 +191,7 @@ const Header = ({ initialTitle, open, title, handleDrawer }) => {
                                     horizontal: 'right',
                                 }}
                             >   
-                                {token ? (<>
+                                {token ? (<div className='text-blue-600'>
                                 <MenuItem onClick={handleAccountMenuClose}>
                                  email: {localStorage.getItem('email')}
                                 </MenuItem>
@@ -201,7 +201,7 @@ const Header = ({ initialTitle, open, title, handleDrawer }) => {
                                 <MenuItem onClick={handleAccountMenuClose}>
                                  <span onClick={handleLogout}>Logout</span> 
                                 </MenuItem>
-                                </>):( <>
+                                </div>):( <div className='text-blue-600'>
                                     <MenuItem>Welcome</MenuItem>
                                 <MenuItem onClick={handleAccountMenuClose}>
                                   <Link to="/signup">Sign Up</Link>  
@@ -209,7 +209,7 @@ const Header = ({ initialTitle, open, title, handleDrawer }) => {
                                     <MenuItem onClick={handleAccountMenuClose}>
                                 <Link to="/signin">Sign In</Link>
                                 </MenuItem>
-                                </>)}
+                                </div>)}
                             </Menu>
                         </Hidden>
                         <Hidden smDown>
@@ -233,6 +233,7 @@ const Header = ({ initialTitle, open, title, handleDrawer }) => {
                                 <AccountCircleRoundedIcon sx={{ color: '#757575' }} />
                             </IconButton>
                             <Menu
+                                 className=' text-blue-600'
                                 id="account-menu"
                                 anchorEl={accountMenuAnchorEl}
                                 open={Boolean(accountMenuAnchorEl)}
@@ -246,9 +247,9 @@ const Header = ({ initialTitle, open, title, handleDrawer }) => {
                                     horizontal: 'right',
                                 }}
                             >
-                              {token ? (<>
+                              {token ? (<div className=' text-blue-600'>
                                 <MenuItem onClick={handleAccountMenuClose}>
-                                  email: {localStorage.getItem('email')}
+                                 email: {localStorage.getItem('email')}
                                 </MenuItem>
                                 <MenuItem onClick={handleAccountMenuClose}>
                                   name: {localStorage.getItem('name')}
@@ -256,7 +257,7 @@ const Header = ({ initialTitle, open, title, handleDrawer }) => {
                                 <MenuItem onClick={handleAccountMenuClose}>
                                  <span onClick={handleLogout}>Logout</span> 
                                 </MenuItem>
-                                </>):( <>
+                                </div>):( <div className='text-blue-600 '>
                                     
                                     <MenuItem>Welcome</MenuItem>
                                 <MenuItem onClick={handleAccountMenuClose}>
@@ -265,7 +266,7 @@ const Header = ({ initialTitle, open, title, handleDrawer }) => {
                                     <MenuItem onClick={handleAccountMenuClose}>
                                 <Link to="/signin">Sign In</Link>
                                 </MenuItem>
-                                </>)}
+                                </div>)}
                             </Menu>
                         </Hidden>
 

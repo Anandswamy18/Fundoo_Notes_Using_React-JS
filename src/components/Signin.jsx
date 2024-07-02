@@ -57,6 +57,7 @@ const Signin = () => {
       localStorage.setItem('email', response.data.email);
       localStorage.setItem('token', response.data.id);
       navigate('/')
+      window.location.reload()
     } catch (error) {
       console.error('Error:', error);
     }
